@@ -10,6 +10,7 @@ public class EnemyPatrol : MonoBehaviour
     private float patrolDistance = 3f;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private Vector3 startPosition;
     private int direction = 1;
 
@@ -17,11 +18,15 @@ public class EnemyPatrol : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y);
+
+        animator.SetBool("isWalking", true);
+
         float distanceFromStart = transform.position.x - startPosition.x;
         if (direction == 1 && distanceFromStart >= patrolDistance)
         {

@@ -17,12 +17,23 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private LayerMask groundLayer;
+
+    [SerializeField]
+    private GameObject fireballPrefab;
+
+    [SerializeField]
+    private Transform firePoint;
+
+    [SerializeField]
+    private float attackCooldown = 3f;
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator animator;
     private PlayerControls controls;
     private Vector2 moveInput;
     private Vector3 initialScale;
+    private int facingDirection = 1;
+    private float lastAttackTime = -999f;
 
     void Awake()
     {
@@ -38,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Move.performed += OnMove;
         controls.Gameplay.Move.canceled += OnMove;
         controls.Gameplay.Jump.performed += OnJump;
+        controls.Gameplay.Attack.performed += OnAttack;
     }
 
     void OnDisable()
@@ -45,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Move.performed -= OnMove;
         controls.Gameplay.Move.canceled -= OnMove;
         controls.Gameplay.Jump.performed -= OnJump;
+        controls.Gameplay.Attack.performed -= OnAttack;
         controls.Gameplay.Disable();
     }
 
@@ -59,26 +72,40 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+        if (Time.time - lastAttackTime < attackCooldown)
+            return;
+        lastAttackTime = Time.time;
+
+        animator.SetTrigger("attack");
+        
+        GameObject fireballObj = Instantiate(
+            fireballPrefab,
+            firePoint.position,
+            Quaternion.identity
+        );
+        Fireball fireball = fireballObj.GetComponent<Fireball>();
+        fireball.SetDirection(facingDirection);
+    }
+
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if (moveInput.x < 0)
         {
-            transform.localScale = new Vector3(
-                -Mathf.Abs(initialScale.x),
-                initialScale.y,
-                initialScale.z
-            );
+            facingDirection = -1;
         }
         else if (moveInput.x > 0)
         {
-            transform.localScale = new Vector3(
-                Mathf.Abs(initialScale.x),
-                initialScale.y,
-                initialScale.z
-            );
+            facingDirection = 1;
         }
+        transform.localScale = new Vector3(
+            facingDirection * Mathf.Abs(initialScale.x),
+            initialScale.y,
+            initialScale.z
+        );
 
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
         animator.SetBool("isRun", moveInput.x != 0f);
