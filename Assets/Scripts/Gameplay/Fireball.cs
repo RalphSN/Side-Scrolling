@@ -7,6 +7,9 @@ public class Fireball : MonoBehaviour
 
     [SerializeField]
     private float lifeTime = 3f;
+
+    [SerializeField]
+    private GameObject hitEffectPrefab;
     private Rigidbody2D rb;
     private int direction = 1;
 
@@ -28,6 +31,13 @@ public class Fireball : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(1);
+
+            if (hitEffectPrefab != null)
+            {
+                Vector3 hitPosition = collision.transform.position + new Vector3(0,2f,0);
+                Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
+            }
+
             Destroy(gameObject);
         }
     }
