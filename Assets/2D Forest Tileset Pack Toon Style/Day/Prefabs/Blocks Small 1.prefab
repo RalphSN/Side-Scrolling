@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4919829385872274}
   - component: {fileID: 212927360208171854}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4695282629052984}
   - component: {fileID: 212003825482005434}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: left_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4816738781100016}
   - component: {fileID: 212261328462570652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: grass1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,9 +286,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4095090834823958}
   - component: {fileID: 61408401884620250}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Blocks Small 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,8 +303,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -38.5, y: -9.7, z: 0.28125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4416414315481364}
   - {fileID: 4617776108914192}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4617776108914192}
   - component: {fileID: 212524430403758592}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: center_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4681392942176146}
   - component: {fileID: 212281418064169594}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tree 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4684830395314948}
   - component: {fileID: 212352078132974196}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: center right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,7 +655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4345665576134764}
   - component: {fileID: 212781349162496970}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: small plant 2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4069048784096212}
   - component: {fileID: 212221123899211216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'right corner  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159335163917326}
   - component: {fileID: 212676907582535760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'left corner '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4015029539673684}
   - component: {fileID: 212582175817189850}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: big plant 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4097653778984498}
   - component: {fileID: 212337431316466472}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: big plant 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1115,7 +1115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4416414315481364}
   - component: {fileID: 212156802416548662}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1207,7 +1207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840460754236766}
   - component: {fileID: 212269491706565076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: grass1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,7 +1299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4740186963007086}
   - component: {fileID: 212533190273184902}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: right_grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,7 +1391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4300762659604014}
   - component: {fileID: 212692218079836254}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: center left
   m_TagString: Untagged
   m_Icon: {fileID: 0}

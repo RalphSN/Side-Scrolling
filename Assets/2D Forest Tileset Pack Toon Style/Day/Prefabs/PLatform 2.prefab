@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4788013813990348}
   - component: {fileID: 212166986984008670}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform center grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4564296887199388}
   - component: {fileID: 212319016672115812}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4982722623832594}
   - component: {fileID: 212739620109328900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'left corner '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,9 +286,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4839646858365274}
   - component: {fileID: 61592220031026712}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PLatform 2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,8 +303,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -39.6, y: -21.1, z: -0.34}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4059714580750396}
   - {fileID: 4056268593602370}
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4059714580750396}
   - component: {fileID: 212332461957400086}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: grass1 (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4465633401525092}
   - component: {fileID: 212488970631282894}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'right corner  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4834280318145106}
   - component: {fileID: 212133428921767796}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: big plant 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275959278033638}
   - component: {fileID: 212113716066344686}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform right grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4752260937820622}
   - component: {fileID: 212799900120114502}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform left grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4056268593602370}
   - component: {fileID: 212993380700510574}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: small plant 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
