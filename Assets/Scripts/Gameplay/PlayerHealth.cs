@@ -10,6 +10,10 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private float knockBackForce = 0.5f;
+
+    [SerializeField]
+    private float hurtDuration = 1f;
+    private float lastHurt = -999f;
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
     private Coroutine knockBackCoroutine;
@@ -27,10 +31,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount, Vector2 damageSourcePosition)
     {
-        Vector2 direction = -((Vector2)transform.position - damageSourcePosition).normalized;
         if (isGameover)
             return;
+        if (Time.time - lastHurt < hurtDuration)
+            return;
+        Vector2 direction = ((Vector2)transform.position - damageSourcePosition).normalized;
         currentHp -= amount;
+        lastHurt = Time.time;
         if (currentHp <= 0)
         {
             // 結束遊戲
@@ -38,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             animator.SetTrigger("hurt");
+            rb.linearVelocity = Vector2.zero;
             rb.AddForce(direction * knockBackForce, ForceMode2D.Impulse);
             if (knockBackCoroutine != null)
             {
@@ -50,6 +58,8 @@ public class PlayerHealth : MonoBehaviour
     private System.Collections.IEnumerator knockBack()
     {
         playerMovement.enabled = false;
+        animator.SetBool("isRun", false);
+        animator.SetBool("isJump", false);
         yield return new WaitForSeconds(knockBackDuration);
         playerMovement.enabled = true;
         knockBackCoroutine = null;

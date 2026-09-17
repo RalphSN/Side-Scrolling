@@ -34,8 +34,9 @@ public class Fireball : MonoBehaviour
 
             if (hitEffectPrefab != null)
             {
-                Vector3 hitPosition = collision.transform.position + new Vector3(0,2f,0);
-                Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
+                Vector3 hitPosition = collision.transform.position + new Vector3(0, 2f, 0);
+                GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
+                Destroy(effect,1.5f);
             }
 
             Destroy(gameObject);

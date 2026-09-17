@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Move.canceled += OnMove;
         controls.Gameplay.Jump.performed += OnJump;
         controls.Gameplay.Attack.performed += OnAttack;
+        moveInput = Vector2.zero;
     }
 
     void OnDisable()
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         lastAttackTime = Time.time;
 
         animator.SetTrigger("attack");
-        
+
         GameObject fireballObj = Instantiate(
             fireballPrefab,
             firePoint.position,
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         fireball.SetDirection(facingDirection);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 

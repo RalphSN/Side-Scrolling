@@ -64,7 +64,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         animator.SetTrigger("die");
-
+        GetComponent<Enemy>().enabled = false;
         GetComponent<Collider2D>().isTrigger = true;
         patrol.enabled = false;
         rb.linearVelocity = Vector2.zero;
