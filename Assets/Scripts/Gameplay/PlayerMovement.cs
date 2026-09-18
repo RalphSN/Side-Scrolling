@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 initialScale;
     private int facingDirection = 1;
     private float lastAttackTime = -999f;
+    private bool wasGroundedLastFrame;
 
     void Awake()
     {
@@ -93,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        // if(isGrounded != wasGroundedLastFrame)
+        // {
+        //     Debug.Log($"[{Time.time:F3}] isGrounded 變成 {isGrounded}");
+        //     wasGroundedLastFrame = isGrounded;
+        // }
 
         if (moveInput.x < 0)
         {
