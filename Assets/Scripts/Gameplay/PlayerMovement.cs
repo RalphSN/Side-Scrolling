@@ -93,7 +93,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded =
+            Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer)
+            && rb.linearVelocity.y <= 0.1f;
         // if(isGrounded != wasGroundedLastFrame)
         // {
         //     Debug.Log($"[{Time.time:F3}] isGrounded 變成 {isGrounded}");
