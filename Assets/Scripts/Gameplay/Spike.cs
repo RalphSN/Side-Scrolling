@@ -9,7 +9,9 @@ public class Spike : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().TakeDamage(damage, (Vector2)transform.position);
+            collision
+                .GetComponent<PlayerHealth>()
+                .TakeDamageWithKnockback(damage, (Vector2)transform.position);
         }
     }
 }

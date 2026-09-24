@@ -30,13 +30,16 @@ public class Fireball : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<EnemyHealth>().TakeDamage(1);
+            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+            if (enemyHealth.IsDead)
+                return;
+            enemyHealth.TakeDamage(1);
 
             if (hitEffectPrefab != null)
             {
                 Vector3 hitPosition = collision.transform.position + new Vector3(0, 2f, 0);
                 GameObject effect = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
-                Destroy(effect,1.5f);
+                Destroy(effect, 1.5f);
             }
 
             Destroy(gameObject);

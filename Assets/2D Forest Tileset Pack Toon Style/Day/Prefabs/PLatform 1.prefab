@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027997835435948}
   - component: {fileID: 212358303122810318}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,9 +103,9 @@ GameObject:
   - component: {fileID: 4734870049203084}
   - component: {fileID: 5330908674916477570}
   - component: {fileID: 2802375217480991350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PLatform 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4877609000584376}
   - component: {fileID: 212898542268950790}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'left corner '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4214930494627084}
   - component: {fileID: 212813441636232276}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4700729807048716}
   - component: {fileID: 212197330257400154}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'right corner  '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4949137082488984}
   - component: {fileID: 212771790996821606}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4192027153595188}
   - component: {fileID: 212105263271119518}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

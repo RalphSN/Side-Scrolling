@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private int maxHp = 10;
@@ -18,8 +18,20 @@ public class PlayerHealth : MonoBehaviour
     private PlayerMovement playerMovement;
     private Coroutine knockBackCoroutine;
     private int currentHp;
+    public int MaxHp
+    {
+        get { return maxHp; }
+    }
+    public int CurrentHp
+    {
+        get { return currentHp; }
+    }
     private Animator animator;
-    private bool isGameover = false;
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
 
     void Awake()
     {
@@ -29,20 +41,27 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    public void TakeDamage(int amount, Vector2 damageSourcePosition)
+    public void TakeDamage(int amount)
     {
-        if (isGameover)
+        if (isDead)
             return;
         if (Time.time - lastHurt < hurtDuration)
             return;
-        Vector2 direction = ((Vector2)transform.position - damageSourcePosition).normalized;
         currentHp -= amount;
         lastHurt = Time.time;
         if (currentHp <= 0)
         {
-            // 結束遊戲
+            isDead = true;
+            // 應該是再寫一個GameOver()之類的
         }
-        else
+    }
+
+    public void TakeDamageWithKnockback(int amount, Vector2 damageSourcePosition)
+    {
+        Vector2 direction = ((Vector2)transform.position - damageSourcePosition).normalized;
+        TakeDamage(amount);
+
+        if (!isDead)
         {
             animator.SetTrigger("hurt");
             rb.linearVelocity = Vector2.zero;

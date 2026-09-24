@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private int maxHp = 1;
@@ -9,10 +9,22 @@ public class EnemyHealth : MonoBehaviour
     private float hitStunDuration = 0.3f;
     private Coroutine hitStunCoroutine;
     private int currentHp;
+    public int MaxHp
+    {
+        get { return maxHp; }
+    }
+    public int CurrentHp
+    {
+        get { return currentHp; }
+    }
     private Animator animator;
     private Rigidbody2D rb;
     private EnemyPatrol patrol;
     private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
 
     void Awake()
     {

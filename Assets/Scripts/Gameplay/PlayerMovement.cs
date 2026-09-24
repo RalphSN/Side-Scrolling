@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 initialScale;
     private int facingDirection = 1;
     private float lastAttackTime = -999f;
-    private bool wasGroundedLastFrame;
+    // private bool wasGroundedLastFrame;
 
     void Awake()
     {
