@@ -12,6 +12,7 @@ public class Fireball : MonoBehaviour
     private GameObject hitEffectPrefab;
     private Rigidbody2D rb;
     private int direction = 1;
+    private int power = 1;
 
     void Awake()
     {
@@ -26,6 +27,11 @@ public class Fireball : MonoBehaviour
         rb.linearVelocity = new Vector2(direction * speed, 0f);
     }
 
+    public void SetPower(int newPower)
+    {
+        power = newPower;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -33,7 +39,7 @@ public class Fireball : MonoBehaviour
             EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
             if (enemyHealth.IsDead)
                 return;
-            enemyHealth.TakeDamage(1);
+            enemyHealth.TakeDamage(power);
 
             if (hitEffectPrefab != null)
             {

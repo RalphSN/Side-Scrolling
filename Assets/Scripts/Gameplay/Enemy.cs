@@ -1,9 +1,18 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IHazard
 {
     [SerializeField]
     private int damage = 1;
+    public int Damage
+    {
+        get { return damage; }
+    }
+
+    public void OnPlayerContact(PlayerHealth player)
+    {
+        player?.TakeDamageWithKnockback(damage, (Vector2)transform.position);
+    }
 
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -11,9 +20,7 @@ public class Enemy : MonoBehaviour
             return;
         if (collision.CompareTag("Player"))
         {
-            collision
-                .GetComponent<PlayerHealth>()
-                .TakeDamageWithKnockback(damage, (Vector2)transform.position);
+            OnPlayerContact(collision.GetComponent<PlayerHealth>());
         }
     }
 }

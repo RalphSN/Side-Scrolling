@@ -17,15 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private LayerMask groundLayer;
-
-    [SerializeField]
-    private GameObject fireballPrefab;
-
-    [SerializeField]
-    private Transform firePoint;
-
-    [SerializeField]
-    private float attackCooldown = 3f;
+    private PlayerAttack playerAttack;
     private Rigidbody2D rb;
     private bool isGrounded;
     private Animator animator;
@@ -33,13 +25,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private Vector3 initialScale;
     private int facingDirection = 1;
-    private float lastAttackTime = -999f;
-    // private bool wasGroundedLastFrame;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         controls = new PlayerControls();
+        playerAttack = GetComponent<PlayerAttack>();
         animator = GetComponent<Animator>();
         initialScale = transform.localScale;
     }
@@ -76,19 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        if (Time.time - lastAttackTime < attackCooldown)
-            return;
-        lastAttackTime = Time.time;
-
-        animator.SetTrigger("attack");
-
-        GameObject fireballObj = Instantiate(
-            fireballPrefab,
-            firePoint.position,
-            Quaternion.identity
-        );
-        Fireball fireball = fireballObj.GetComponent<Fireball>();
-        fireball.SetDirection(facingDirection);
+        playerAttack.Attack(facingDirection);
     }
 
     void FixedUpdate()

@@ -41,12 +41,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    public void TakeDamage(int amount)
+    private bool ApplyDamage(int amount)
     {
         if (isDead)
-            return;
+            return false;
         if (Time.time - lastHurt < hurtDuration)
-            return;
+            return false;
         currentHp -= amount;
         lastHurt = Time.time;
         if (currentHp <= 0)
@@ -54,14 +54,19 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             isDead = true;
             // 應該是再寫一個GameOver()之類的
         }
+        return true;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        ApplyDamage(amount);
     }
 
     public void TakeDamageWithKnockback(int amount, Vector2 damageSourcePosition)
     {
         Vector2 direction = ((Vector2)transform.position - damageSourcePosition).normalized;
-        TakeDamage(amount);
-
-        if (!isDead)
+        bool hasHurt = ApplyDamage(amount);
+        if (!isDead && hasHurt)
         {
             animator.SetTrigger("hurt");
             rb.linearVelocity = Vector2.zero;
