@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IDamageable
+[RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(Collider2D))]
+public abstract class EnemyBase : MonoBehaviour, IHazard, IDamageable
 {
     [SerializeField]
-    private int maxHp = 1;
+    protected int maxHp = 1;
 
     [SerializeField]
-    private float hitStunDuration = 0.3f;
-    private Coroutine hitStunCoroutine;
-    private int currentHp;
+    protected int damage = 1;
+
+    [SerializeField]
+    Collider2D standZone;
+    public int Damage
+    {
+        get { return damage; }
+    }
+    protected int currentHp;
     public int MaxHp
     {
         get { return maxHp; }
@@ -17,21 +24,19 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         get { return currentHp; }
     }
-    private Animator animator;
-    private Rigidbody2D rb;
-    private EnemyPatrol patrol;
-    private bool isDead = false;
+    protected Animator animator;
+    protected Rigidbody2D rb;
+    protected bool isDead = false;
     public bool IsDead
     {
         get { return isDead; }
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         currentHp = maxHp;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        patrol = GetComponent<EnemyPatrol>();
     }
 
     public void TakeDamage(int amount)
@@ -46,44 +51,31 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         else
         {
             animator.SetTrigger("hurt");
-            if (hitStunCoroutine != null)
-            {
-                StopCoroutine(hitStunCoroutine);
-            }
-            hitStunCoroutine = StartCoroutine(HitStun());
+            OnHurt();
         }
     }
 
-    private System.Collections.IEnumerator HitStun()
-    {
-        patrol.enabled = false;
-        rb.linearVelocity = Vector2.zero;
-
-        yield return new WaitForSeconds(hitStunDuration);
-
-        patrol.enabled = true;
-        hitStunCoroutine = null;
-    }
+    protected virtual void OnHurt() { }
 
     private void Die()
     {
         isDead = true;
-
-        if (hitStunCoroutine != null)
+        OnDead();
+        animator.SetTrigger("die");
+        enabled = false;
+        
+        if (standZone != null)
         {
-            StopCoroutine(hitStunCoroutine);
-            hitStunCoroutine = null;
+            standZone.isTrigger = true;
         }
 
-        animator.SetTrigger("die");
-        GetComponent<Enemy>().enabled = false;
-        GetComponent<Collider2D>().isTrigger = true;
-        patrol.enabled = false;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0f;
         float deathAnimationLength = GetDeathAnimationLength();
         Destroy(gameObject, deathAnimationLength);
     }
+
+    protected virtual void OnDead() { }
 
     private float GetDeathAnimationLength()
     {
@@ -94,5 +86,20 @@ public class EnemyHealth : MonoBehaviour, IDamageable
                 return clip.length;
         }
         return 1f;
+    }
+
+    public void OnPlayerContact(PlayerHealth player)
+    {
+        player?.TakeDamageWithKnockback(damage, (Vector2)transform.position);
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!enabled)
+            return;
+        if (collision.CompareTag("Player"))
+        {
+            OnPlayerContact(collision.GetComponent<PlayerHealth>());
+        }
     }
 }

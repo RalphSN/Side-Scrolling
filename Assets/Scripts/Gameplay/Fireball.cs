@@ -36,10 +36,11 @@ public class Fireball : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-            if (enemyHealth.IsDead)
+            IDamageable target = collision.GetComponent<IDamageable>();
+            if (target == null || target.IsDead)
                 return;
-            enemyHealth.TakeDamage(power);
+                
+            target.TakeDamage(power);
 
             if (hitEffectPrefab != null)
             {

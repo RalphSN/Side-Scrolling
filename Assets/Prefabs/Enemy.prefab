@@ -370,7 +370,6 @@ GameObject:
   - component: {fileID: 1679996879866046983}
   - component: {fileID: 2891613549672834306}
   - component: {fileID: 7229708016708908477}
-  - component: {fileID: 6170591961098763185}
   - component: {fileID: 5412414655348691248}
   m_Layer: 7
   m_Name: Enemy
@@ -513,20 +512,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6170591961098763185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 911288980169337247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63d9c24f2f287424b95c2f9a50e4d20a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHp: 5
-  hitStunDuration: 1
 --- !u!114 &5412414655348691248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cecfe0144514b24b948ccfb4a5fb54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHp: 5
   damage: 1
+  standZone: {fileID: 5720636344316269084}
+  hitStunDuration: 0.3
 --- !u!1 &1016806218927589700
 GameObject:
   m_ObjectHideFlags: 0

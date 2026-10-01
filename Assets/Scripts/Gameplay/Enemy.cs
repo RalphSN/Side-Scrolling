@@ -1,26 +1,48 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IHazard
+[RequireComponent(typeof(EnemyPatrol))]
+public class Enemy : EnemyBase
 {
     [SerializeField]
-    private int damage = 1;
-    public int Damage
+    private float hitStunDuration = 0.3f;
+    private Coroutine hitStunCoroutine;
+    private EnemyPatrol patrol;
+
+    protected override void Awake()
     {
-        get { return damage; }
+        base.Awake();
+        patrol = GetComponent<EnemyPatrol>();
     }
 
-    public void OnPlayerContact(PlayerHealth player)
+    protected override void OnHurt()
     {
-        player?.TakeDamageWithKnockback(damage, (Vector2)transform.position);
-    }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!enabled)
-            return;
-        if (collision.CompareTag("Player"))
+        base.OnHurt();
+        if (hitStunCoroutine != null)
         {
-            OnPlayerContact(collision.GetComponent<PlayerHealth>());
+            StopCoroutine(hitStunCoroutine);
         }
+        hitStunCoroutine = StartCoroutine(HitStun());
+    }
+
+    private System.Collections.IEnumerator HitStun()
+    {
+        patrol.enabled = false;
+        rb.linearVelocity = Vector2.zero;
+
+        yield return new WaitForSeconds(hitStunDuration);
+
+        patrol.enabled = true;
+        hitStunCoroutine = null;
+    }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+        if (hitStunCoroutine != null)
+        {
+            StopCoroutine(hitStunCoroutine);
+            hitStunCoroutine = null;
+        } 
+        patrol.enabled = false;
     }
 }
