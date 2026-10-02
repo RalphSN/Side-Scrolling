@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
@@ -13,8 +14,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [SerializeField]
     private float hurtDuration = 1f;
+
+    [SerializeField]
+    private LayerMask deadIgnoreLayers;
+    public event Action OnPlayerDied;
     private float lastHurt = -999f;
     private Rigidbody2D rb;
+    private Animator animator;
     private PlayerMovement playerMovement;
     private Coroutine knockBackCoroutine;
     private int currentHp;
@@ -26,7 +32,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         get { return currentHp; }
     }
-    private Animator animator;
+
     private bool isDead = false;
     public bool IsDead
     {
@@ -41,6 +47,24 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+    private void Die()
+    {
+        isDead = true;
+        rb.excludeLayers |= deadIgnoreLayers;
+        animator.SetBool("isRun", false);
+        animator.SetBool("isJump", false);
+        animator.SetTrigger("die");
+        playerMovement.enabled = false;
+        rb.linearVelocity = Vector2.zero;
+
+        if (knockBackCoroutine != null)
+        {
+            StopCoroutine(knockBackCoroutine);
+        }
+        knockBackCoroutine = null;
+        OnPlayerDied?.Invoke();
+    }
+
     private bool ApplyDamage(int amount)
     {
         if (isDead)
@@ -51,8 +75,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         lastHurt = Time.time;
         if (currentHp <= 0)
         {
-            isDead = true;
-            // 應該是再寫一個GameOver()之類的
+            Die();
         }
         return true;
     }
