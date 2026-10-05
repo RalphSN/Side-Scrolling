@@ -47,9 +47,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Die()
+    public void Die()
     {
+        if (isDead)
+            return;
         isDead = true;
+        currentHp = 0;
         rb.excludeLayers |= deadIgnoreLayers;
         animator.SetBool("isRun", false);
         animator.SetBool("isJump", false);
