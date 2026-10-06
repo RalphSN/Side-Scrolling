@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(Collider2D))]
@@ -31,6 +32,7 @@ public abstract class EnemyBase : MonoBehaviour, IHazard, IDamageable
     {
         get { return isDead; }
     }
+    public static event Action OnEnemyDied;
 
     protected virtual void Awake()
     {
@@ -63,7 +65,7 @@ public abstract class EnemyBase : MonoBehaviour, IHazard, IDamageable
         OnDead();
         animator.SetTrigger("die");
         enabled = false;
-        
+
         if (standZone != null)
         {
             standZone.isTrigger = true;
@@ -73,6 +75,7 @@ public abstract class EnemyBase : MonoBehaviour, IHazard, IDamageable
         rb.gravityScale = 0f;
         float deathAnimationLength = GetDeathAnimationLength();
         Destroy(gameObject, deathAnimationLength);
+        OnEnemyDied?.Invoke();
     }
 
     protected virtual void OnDead() { }

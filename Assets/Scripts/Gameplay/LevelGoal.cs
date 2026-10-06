@@ -4,13 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class LevelGoal : MonoBehaviour
 {
+    [SerializeField] private int scoreGoal = 3;
+    [SerializeField] ScoreManager scoreManager;
     private bool hasCompleted = false;
     public event Action OnCompleted;
 
+
     private bool CanComplete()
     {
-        // TODO: 之後加上分數條件
-        return true;
+        return scoreManager.Score >= scoreGoal;
     }
 
     private void GameComplete()
@@ -20,7 +22,7 @@ public class LevelGoal : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (hasCompleted)
             return;

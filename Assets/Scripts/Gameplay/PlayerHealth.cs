@@ -54,8 +54,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         isDead = true;
         currentHp = 0;
         rb.excludeLayers |= deadIgnoreLayers;
-        animator.SetBool("isRun", false);
-        animator.SetBool("isJump", false);
         animator.SetTrigger("die");
         playerMovement.enabled = false;
         rb.linearVelocity = Vector2.zero;
@@ -108,8 +106,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private System.Collections.IEnumerator knockBack()
     {
         playerMovement.enabled = false;
-        animator.SetBool("isRun", false);
-        animator.SetBool("isJump", false);
         yield return new WaitForSeconds(knockBackDuration);
         playerMovement.enabled = true;
         knockBackCoroutine = null;

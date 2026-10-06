@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     PlayerHealth playerHealth;
 
     [SerializeField]
+    PlayerMovement playerMovement;
+
+    [SerializeField]
     GameObject gameOverPanel;
 
     [SerializeField]
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
     private void HandlePlayerWin()
     {
         stageClearPanel.SetActive(true);
+        playerMovement.Freeze();
     }
 
     public void Restart()

@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Jump.performed -= OnJump;
         controls.Gameplay.Attack.performed -= OnAttack;
         controls.Gameplay.Disable();
+        animator.SetBool("isRun", false);
+        animator.SetBool("isJump", false);
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -98,5 +100,11 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
         animator.SetBool("isRun", moveInput.x != 0f);
         animator.SetBool("isJump", !isGrounded);
+    }
+
+    public void Freeze()
+    {
+        rb.linearVelocity = Vector2.zero;
+        enabled = false;
     }
 }
