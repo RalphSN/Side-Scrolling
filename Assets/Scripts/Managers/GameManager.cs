@@ -21,13 +21,13 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         playerHealth.OnPlayerDied += HandlePlayerDied;
-        levelGoal.OnCompleted += HandlePlayerWin;
+        levelGoal.OnCompleted += HandleLevelCompleted;
     }
 
     void OnDisable()
     {
         playerHealth.OnPlayerDied -= HandlePlayerDied;
-        levelGoal.OnCompleted -= HandlePlayerWin;
+        levelGoal.OnCompleted -= HandleLevelCompleted;
     }
 
     private void HandlePlayerDied()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    private void HandlePlayerWin()
+    private void HandleLevelCompleted()
     {
         stageClearPanel.SetActive(true);
         playerMovement.Freeze();

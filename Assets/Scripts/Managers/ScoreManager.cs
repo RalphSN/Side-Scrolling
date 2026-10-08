@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public event Action<int> OnScoreChanged;
     private int score = 0;
     public int Score
     {
@@ -10,17 +12,17 @@ public class ScoreManager : MonoBehaviour
 
     void OnEnable()
     {
-        EnemyBase.OnEnemyDied += HandleAddScore;
+        EnemyBase.OnEnemyDied += HandleEnemyDied;
     }
 
     void OnDisable()
     {
-        EnemyBase.OnEnemyDied -= HandleAddScore;
+        EnemyBase.OnEnemyDied -= HandleEnemyDied;
     }
 
-    private void HandleAddScore()
+    private void HandleEnemyDied()
     {
         score++;
-        Debug.Log($"現在分數{score}");
+        OnScoreChanged?.Invoke(score);
     }
 }

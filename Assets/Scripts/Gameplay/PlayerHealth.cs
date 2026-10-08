@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [SerializeField]
     private LayerMask deadIgnoreLayers;
+    public event Action<int, int> OnHealthChanged;
     public event Action OnPlayerDied;
     private float lastHurt = -999f;
     private Rigidbody2D rb;
@@ -47,12 +48,21 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+    private void SetHealth(int updatedHp)
+    {
+        updatedHp = Mathf.Clamp(updatedHp, 0, maxHp);
+        if (updatedHp == currentHp)
+            return;
+        currentHp = updatedHp;
+        OnHealthChanged?.Invoke(currentHp, maxHp);
+    }
+
     public void Die()
     {
         if (isDead)
             return;
         isDead = true;
-        currentHp = 0;
+        SetHealth(0);
         rb.excludeLayers |= deadIgnoreLayers;
         animator.SetTrigger("die");
         playerMovement.enabled = false;
@@ -72,7 +82,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             return false;
         if (Time.time - lastHurt < hurtDuration)
             return false;
-        currentHp -= amount;
+        SetHealth(currentHp - amount);
         lastHurt = Time.time;
         if (currentHp <= 0)
         {
