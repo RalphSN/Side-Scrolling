@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class HUD : MonoBehaviour
 
     [SerializeField]
     private ScoreManager scoreManager;
+
+    [SerializeField]
+    private Image healthFill;
 
     void OnEnable()
     {
@@ -39,10 +43,11 @@ public class HUD : MonoBehaviour
     private void HandleHealthChanged(int current, int max)
     {
         healthText.text = $"HP {current} / {max}";
+        healthFill.fillAmount = (float)current / (float)max;
     }
 
     private void HandleScoreChanged(int score)
     {
-        killedText.text = $"Kill Score {score} / {levelGoal.RequiredScore}";
+        killedText.text = $"{score} / {levelGoal.RequiredScore}";
     }
 }
