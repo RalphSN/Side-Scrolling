@@ -107,4 +107,21 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         enabled = false;
     }
+
+    public void SetInputEnabled(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            controls.Gameplay.Enable();
+        }
+        else
+        {
+            controls.Gameplay.Disable();
+        }
+    }
+
+    void OnDestroy()
+    {
+        controls.Dispose();
+    }
 }
